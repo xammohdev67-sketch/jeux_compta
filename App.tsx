@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { ActivityIndicator, ScrollView, Text, TouchableOpacity, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { AccountCatalogSection } from './src/features/accounting/components/AccountCatalogSection';
 import { ACCOUNT_CLASSES } from './src/features/accounting/data/accounts';
 import { ImputationQuizScreen } from './src/features/game_engine/components/ImputationQuizScreen';
@@ -10,6 +10,14 @@ import './global.css';
 import { useGameStore } from './src/store/useGameStore';
 
 export default function App() {
+  return (
+    <SafeAreaProvider>
+      <AppContent />
+    </SafeAreaProvider>
+  );
+}
+
+function AppContent() {
   const [isPlaying, setIsPlaying] = useState(false);
   const { currentLevel, hasHydrated, lives, maxLives, restoreLives, streak, xp } =
     useGameStore();
